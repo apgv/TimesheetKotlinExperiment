@@ -3,6 +3,11 @@
 ### IntelliJ directory-based project format
 .idea/
 
+## File-based project format
+*.ipr
+*.iml
+*.iws
+
 ## Additional for IntelliJ
 out/
 
