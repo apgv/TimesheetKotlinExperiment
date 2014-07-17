@@ -27,6 +27,9 @@ repositories {
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+
 }
 
 task wrapper(type: Wrapper) {
