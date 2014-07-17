@@ -5,9 +5,17 @@ import spock.lang.Specification
 
 class HelloControllerTest extends Specification {
     def controller = new HelloController()
+    def helloServiceMock = Mock(HelloService)
 
-    def "first greeting from REST-ish service"() {
-        expect:
-        controller.greeting() == "Hello world!"
+    void setup() {
+        controller.helloService = helloServiceMock
+    }
+
+    def "controller should call service"() {
+        when:
+        controller.greeting()
+
+        then:
+        1 * helloServiceMock.greeting()
     }
 }
