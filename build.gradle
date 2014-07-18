@@ -28,8 +28,14 @@ repositories {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
 
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    compile 'org.apache.shiro:shiro-core:1.2.3'
+    compile 'org.apache.shiro:shiro-web:1.2.3'
+    compile 'org.apache.shiro:shiro-spring:1.2.3'
+    compile 'com.stormpath.shiro:stormpath-shiro-core:0.6.0'
 
+    runtime 'com.stormpath.sdk:stormpath-sdk-httpclient:1.0.RC2'
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 }
 
 task wrapper(type: Wrapper) {
