@@ -1,4 +1,4 @@
-package hello
+package me.colombiano.timesheet.hello
 
 import org.springframework.stereotype.Service
 

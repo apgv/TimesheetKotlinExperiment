@@ -1,4 +1,4 @@
-package hello
+package me.colombiano.timesheet
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-class HelloApplication {
+class Application {
     static void main(String[] args) {
-        SpringApplication.run(HelloApplication.class, args)
+        SpringApplication.run(Application.class, args)
     }
 }
