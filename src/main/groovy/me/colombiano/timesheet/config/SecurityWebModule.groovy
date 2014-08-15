@@ -31,9 +31,9 @@ class SecurityWebModule extends ShiroWebModule {
     protected void configureShiroWeb() {
         bindRealm().toInstance(realm())
         bindConstant().annotatedWith(Names.named("shiro.loginUrl")).to("/")
-        addFilterChain("/index.html", ANON)
         addFilterChain("/rest/auth/**", ANON)
-        addFilterChain("/**", AUTHC)
+        addFilterChain("/rest/**", AUTHC)
+        addFilterChain("/**", ANON)
     }
 
     @Provides
