@@ -29,7 +29,7 @@ class SecurityWebModule extends ShiroWebModule {
 
     @Override
     protected void configureShiroWeb() {
-        bindRealm().toInstance(realm())
+        bindRealm().to(Realm.class)
         bindConstant().annotatedWith(Names.named("shiro.loginUrl")).to("/")
         addFilterChain("/rest/auth/**", ANON)
         addFilterChain("/rest/**", AUTHC)
@@ -37,12 +37,12 @@ class SecurityWebModule extends ShiroWebModule {
     }
 
     @Provides
-    Realm realm() {
+    Realm realm(Client client, GroupRoleResolver groupRoleResolver) {
         final APPLICATION_ID = System.getenv("STORMPATH_TIMESHEET_APPLICATION_ID")
         final realm = new ApplicationRealm()
-        realm.client = client()
+        realm.client = client
         realm.applicationRestUrl = "https://api.stormpath.com/v1/applications/${APPLICATION_ID}"
-        realm.groupRoleResolver = groupRoleResolver()
+        realm.groupRoleResolver = groupRoleResolver
         realm
     }
 
