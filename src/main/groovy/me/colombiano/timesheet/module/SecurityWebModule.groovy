@@ -1,4 +1,4 @@
-package me.colombiano.timesheet.config
+package me.colombiano.timesheet.module
 
 import com.google.inject.Provides
 import com.google.inject.binder.AnnotatedBindingBuilder
@@ -9,6 +9,7 @@ import com.stormpath.sdk.client.Clients
 import com.stormpath.shiro.realm.ApplicationRealm
 import com.stormpath.shiro.realm.DefaultGroupRoleResolver
 import com.stormpath.shiro.realm.GroupRoleResolver
+import me.colombiano.timesheet.config.SecurityConfig
 import org.apache.shiro.guice.web.ShiroWebModule
 import org.apache.shiro.realm.Realm
 import org.apache.shiro.session.mgt.SessionManager
@@ -37,20 +38,19 @@ class SecurityWebModule extends ShiroWebModule {
     }
 
     @Provides
-    Realm realm(Client client, GroupRoleResolver groupRoleResolver) {
-        final APPLICATION_ID = System.getenv("STORMPATH_TIMESHEET_APPLICATION_ID")
+    Realm realm(final Client client, final SecurityConfig securityConfig, final GroupRoleResolver groupRoleResolver) {
         final realm = new ApplicationRealm()
         realm.client = client
-        realm.applicationRestUrl = "https://api.stormpath.com/v1/applications/${APPLICATION_ID}"
+        realm.applicationRestUrl = securityConfig.stormpathApplicationRestUrl()
         realm.groupRoleResolver = groupRoleResolver
         realm
     }
 
     @Provides
-    Client client() {
+    Client client(final SecurityConfig securityConfig) {
         final properties = new Properties()
-        properties.putAll(["apiKey.id"    : System.getenv("STORMPATH_APIKEY_ID"),
-                           "apiKey.secret": System.getenv("STORMPATH_APIKEY_SECRET")])
+        properties.putAll(["apiKey.id"    : securityConfig.stormpathApikeyId(),
+                           "apiKey.secret": securityConfig.stormpathApikeySecret()])
 
         final apiKey = ApiKeys.builder()
                 .setProperties(properties)

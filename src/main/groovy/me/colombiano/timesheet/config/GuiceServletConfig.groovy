@@ -6,6 +6,8 @@ import com.google.inject.servlet.GuiceServletContextListener
 import com.google.inject.servlet.ServletModule
 import com.sun.jersey.guice.JerseyServletModule
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer
+import me.colombiano.timesheet.module.SecurityWebModule
+import me.colombiano.timesheet.module.TimesheetModule
 import me.colombiano.timesheet.resource.auth.AuthResource
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.guice.web.GuiceShiroFilter
@@ -34,6 +36,7 @@ class GuiceServletConfig extends GuiceServletContextListener {
                         filter("/*").through(GuiceShiroFilter.class)
                     }
                 },
+                new TimesheetModule(),
                 new SecurityWebModule(servletContext),
                 new JerseyServletModule() {
                     @Override
