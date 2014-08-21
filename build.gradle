@@ -13,7 +13,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy:2.3.4'
+    compile 'org.codehaus.groovy:groovy:2.3.6'
+    compile 'org.codehaus.groovy:groovy-json:2.3.6'
+    compile 'org.codehaus.groovy:groovy-sql:2.3.6'
 
     compile 'com.google.inject:guice:3.0'
     compile 'com.google.inject.extensions:guice-servlet:3.0'
@@ -25,6 +27,11 @@ dependencies {
     compile 'org.apache.shiro:shiro-web:1.2.3'
     compile 'org.apache.shiro:shiro-guice:1.2.3'
     compile 'com.stormpath.shiro:stormpath-shiro-core:0.6.0'
+
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+
+    compile 'com.zaxxer:HikariCP:2.0.1'
+    compile 'mysql:mysql-connector-java:5.1.32'
 
     compile 'org.apache.logging.log4j:log4j-api:2.0'
     compile 'org.apache.logging.log4j:log4j-core:2.0'
