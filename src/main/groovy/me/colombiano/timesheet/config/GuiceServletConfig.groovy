@@ -6,6 +6,7 @@ import com.google.inject.servlet.GuiceServletContextListener
 import com.google.inject.servlet.ServletModule
 import com.sun.jersey.guice.JerseyServletModule
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer
+import me.colombiano.timesheet.dbmigration.DatabaseMigration
 import me.colombiano.timesheet.module.SecurityWebModule
 import me.colombiano.timesheet.module.TimesheetModule
 import me.colombiano.timesheet.resource.auth.AuthResource
@@ -49,6 +50,8 @@ class GuiceServletConfig extends GuiceServletContextListener {
 
         final securityManager = injector.getInstance(SecurityManager.class)
         SecurityUtils.setSecurityManager(securityManager)
+        final databaseMigration = injector.getInstance(DatabaseMigration.class)
+        databaseMigration.migrate()
         injector
     }
 
