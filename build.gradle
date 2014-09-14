@@ -1,4 +1,13 @@
-apply plugin: 'groovy'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.8.11'
+    }
+}
+
+apply plugin: 'kotlin'
 apply plugin: 'idea'
 apply plugin: 'jetty'
 
@@ -10,12 +19,15 @@ jar {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy:2.3.6'
-    compile 'org.codehaus.groovy:groovy-json:2.3.6'
-    compile 'org.codehaus.groovy:groovy-sql:2.3.6'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.8.11'
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.jayway.jsonpath:json-path:0.9.1'
 
     compile 'com.google.inject:guice:3.0'
     compile 'com.google.inject.extensions:guice-servlet:3.0'
@@ -40,7 +52,8 @@ dependencies {
 
     runtime 'com.stormpath.sdk:stormpath-sdk-httpclient:1.0.RC2'
 
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testCompile 'org.spek:spek:0.1.127'
+    testCompile 'org.mockito:mockito-core:1.9.5'
 }
 
 task wrapper(type: Wrapper) {
