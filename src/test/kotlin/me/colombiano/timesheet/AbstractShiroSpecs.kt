@@ -9,12 +9,11 @@ import org.apache.shiro.util.LifecycleUtils
 import org.apache.shiro.UnavailableSecurityManagerException
 import org.spek.Spek
 
-
 //Entire class is a modification of AbstractShiroTest found at http://shiro.apache.org/testing.html
 /**
  * Abstract test case enabling Shiro in test environments.
  */
-abstract class AbstractShiroSpecs: Spek() {
+abstract class AbstractShiroSpecs : Spek() {
 
     private var subjectThreadState: ThreadState? = Any() as? SubjectThreadState
     /**

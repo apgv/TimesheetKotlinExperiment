@@ -1,11 +1,10 @@
-package me.colombiano.timesheet.config
+package me.colombiano.timesheet.security
 
 import me.colombiano.timesheet.environment.Environment
 import me.colombiano.timesheet.environment.SystemEnvironment
 import org.apache.commons.lang3.StringUtils.*
 import me.colombiano.timesheet.environment.EnvironmentConstant
 import me.colombiano.timesheet.environment.EnvironmentConstant.*
-
 
 class StormpathConfig() : SecurityConfig {
 

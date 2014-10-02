@@ -8,7 +8,6 @@ import org.apache.shiro.authc.UsernamePasswordToken
 import kotlin.test.*
 import javax.ws.rs.core.Response
 
-
 class AuthResourceSpecs : AbstractShiroSpecs() {{
 
     given("an auth resouce") {

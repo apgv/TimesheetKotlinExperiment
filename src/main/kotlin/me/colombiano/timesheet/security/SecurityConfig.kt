@@ -1,5 +1,4 @@
-package me.colombiano.timesheet.config
-
+package me.colombiano.timesheet.security
 
 trait SecurityConfig {
 

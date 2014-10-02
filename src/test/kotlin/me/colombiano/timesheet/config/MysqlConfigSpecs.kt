@@ -11,7 +11,7 @@ import com.google.gson.Gson
 import me.colombiano.timesheet.environment.PivotalWebServiceConstants
 import com.jayway.jsonpath.JsonPath
 
-public class MysqlConfigSpecs : Spek() {{
+class MysqlConfigSpecs : Spek() {{
 
     given("a mysql config") {
         val environmentMock = mock(javaClass<Environment>())
@@ -102,40 +102,6 @@ public class MysqlConfigSpecs : Spek() {{
     }
   ]
 }"""
-
-//        val pivotalWebServicesJsonString : String = """{
-//        "name": "cleardb-ebf69"
-//        }"""
-//        val gson = Gson()
-//        var pivotalWebServices: PivotalWebServices? = PivotalWebServices()
-//        try {
-//            pivotalWebServices = gson.fromJson(pivotalWebServicesJsonString, javaClass<PivotalWebServices>())
-//        } catch(e: Exception) {
-//            e.printStackTrace()
-//        }
-        //        println("host: " + pivotalWebServices?.host)
-//        println("port: " + pivotalWebServices?.port)
-//        println("name: " + pivotalWebServices?.name)
-//        println("username: " + pivotalWebServices?.username)
-//        println("password: " + pivotalWebServices?.password)
-
-
-        val jsonString = JsonPath.read<String>(pivotalWebServicesJsonString, "$.cleardb[0].credentials.port")
-        println("jsonString: " + jsonString)
-        val jsonMap = JsonPath.read<Map<String, Any>>(pivotalWebServicesJsonString, "$.cleardb[0].credentials['host', 'port']")
-
-        println("for each")
-        jsonMap?.forEach {
-         println(it.key + "=" + it.value)
-        }
-
-        println("for loop")
-        for (entry in jsonMap) {
-            println("key: " + entry.key + " value: " + entry.value)
-        }
-
-//        println("jsonMap: " + jsonMap)
-        //        val port : String = JsonPath.read(pivotalWebServicesJsonString, "$.cleardb[0].credentials.port")
 
         val environmentMock = mock(javaClass<Environment>())
         `when`(environmentMock?.pivotalWebServicesJsonString())?.thenReturn(pivotalWebServicesJsonString)

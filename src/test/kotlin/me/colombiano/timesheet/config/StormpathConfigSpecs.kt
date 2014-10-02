@@ -8,7 +8,7 @@ import me.colombiano.timesheet.environment.Environment
 import kotlin.test.expect
 import kotlin.test.fail
 import kotlin.test.fails
-
+import me.colombiano.timesheet.security
 
 class StormpathConfigSpecs : Spek() {{
 
@@ -19,7 +19,7 @@ class StormpathConfigSpecs : Spek() {{
         `when`(environmentMock?.stormpathApikeyId())?.thenReturn("api_key_id")
         `when`(environmentMock?.stormpathApikeySecret())?.thenReturn("api_key_secret")
 
-        val stormpathConfig = StormpathConfig()
+        val stormpathConfig = security.StormpathConfig()
         stormpathConfig.environment(environmentMock)
 
         on("calling stormpathApplicationRestUrl") {
@@ -51,7 +51,7 @@ class StormpathConfigSpecs : Spek() {{
         val environmentMock = mock(javaClass<Environment>())
         `when`(environmentMock?.stormpathApplicationId())?.thenReturn("")
 
-        val stormpathConfig = StormpathConfig()
+        val stormpathConfig = security.StormpathConfig()
         stormpathConfig.environment(environmentMock)
 
         on("calling stormpathApplicationRestUrl") {
@@ -78,5 +78,4 @@ class StormpathConfigSpecs : Spek() {{
             }
         }
     }
-}
-}
+}}
