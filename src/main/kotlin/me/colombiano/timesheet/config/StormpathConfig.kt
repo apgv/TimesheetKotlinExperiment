@@ -2,7 +2,6 @@ package me.colombiano.timesheet.config
 
 import me.colombiano.timesheet.environment.Environment
 import me.colombiano.timesheet.environment.SystemEnvironment
-import com.google.inject.Inject
 import org.apache.commons.lang3.StringUtils.*
 import me.colombiano.timesheet.environment.EnvironmentConstant
 import me.colombiano.timesheet.environment.EnvironmentConstant.*
@@ -13,7 +12,6 @@ class StormpathConfig() : SecurityConfig {
     private val errorMessage = "Environment variable %s is not defined"
     private var environment: Environment? = SystemEnvironment()
 
-    Inject
     fun environment(environment: Environment?) {
         this.environment = environment
     }

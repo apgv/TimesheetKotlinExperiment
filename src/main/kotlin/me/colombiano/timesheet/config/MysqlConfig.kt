@@ -1,7 +1,6 @@
 package me.colombiano.timesheet.config
 
 import me.colombiano.timesheet.environment.Environment
-import com.google.inject.Inject
 import org.apache.commons.lang3.StringUtils.*
 import com.jayway.jsonpath.JsonPath
 import me.colombiano.timesheet.environment.PivotalWebServiceConstants.*
@@ -12,7 +11,6 @@ class MysqlConfig() : DatabaseConfig {
     
     private var pivotalWebServicesJsonString: String? = ""
 
-    Inject
     fun environment(environment: Environment?) {
         pivotalWebServicesJsonString = environment?.pivotalWebServicesJsonString()
     }
