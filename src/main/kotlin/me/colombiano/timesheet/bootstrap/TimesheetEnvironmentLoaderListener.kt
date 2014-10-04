@@ -18,19 +18,13 @@ class TimesheetEnvironmentLoaderListener : security.TimesheetShiroSecurity, Envi
     private val dataSource: HikariDataSource = hikariDataSource(MysqlConfig())
 
     override fun contextInitialized(sce: ServletContextEvent?) {
-        setupSecurity(sce?.getServletContext())
+        secureWebApplication(sce?.getServletContext())
         migrateDatabase(dataSource)
     }
 
     override fun contextDestroyed(sce: ServletContextEvent?) {
-        super<EnvironmentLoaderListener>.contextDestroyed(sce)
         dataSource.shutdown()
-    }
-
-    private fun setupSecurity(servletContext: ServletContext?) {
-        val webEnvironment = secureWebEnvironment()
-        webEnvironment.setServletContext(servletContext)
-        servletContext?.setAttribute(EnvironmentLoader.ENVIRONMENT_ATTRIBUTE_KEY, webEnvironment)
+        super<EnvironmentLoaderListener>.contextDestroyed(sce)
     }
 
     private fun migrateDatabase(dataSource: DataSource) {

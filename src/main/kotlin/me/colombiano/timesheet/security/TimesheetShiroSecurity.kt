@@ -14,10 +14,13 @@ import com.stormpath.shiro.realm.GroupRoleResolver
 import org.apache.shiro.cache.MemoryConstrainedCacheManager
 import com.stormpath.shiro.realm.DefaultGroupRoleResolver
 import org.apache.shiro.web.filter.mgt.DefaultFilter
+import javax.servlet.ServletContext
+import org.apache.shiro.web.env.EnvironmentLoader
+import org.apache.shiro.web.env.WebEnvironment
 
 trait TimesheetShiroSecurity {
 
-    fun secureWebEnvironment(): DefaultWebEnvironment {
+    fun secureWebApplication(servletContext: ServletContext?) {
         val stormpathConfig = StormpathConfig()
         val stormpathApiKeyProperties = stormpathApiKeyProperties(stormpathConfig)
         val cacheManager = MemoryConstrainedCacheManager()
@@ -27,14 +30,17 @@ trait TimesheetShiroSecurity {
         val securityManager = securityManager(cacheManager, stormpathRealm)
         val filterChainManager = filterChainManager()
         val filterChainResolver = filterChainResolver(filterChainManager)
-        return webEnvironment(securityManager, filterChainResolver)
+        val webEnvironment = webEnvironment(securityManager, filterChainResolver, servletContext)
+        servletContext?.setAttribute(EnvironmentLoader.ENVIRONMENT_ATTRIBUTE_KEY, webEnvironment)
     }
 
     private fun webEnvironment(securityManager: DefaultWebSecurityManager,
-                               filterChainResolver: FilterChainResolver): DefaultWebEnvironment {
+                               filterChainResolver: FilterChainResolver,
+                               servletContext: ServletContext?): WebEnvironment {
         val webEnvironment = DefaultWebEnvironment()
         webEnvironment.setSecurityManager(securityManager)
         webEnvironment.setFilterChainResolver(filterChainResolver)
+        webEnvironment.setServletContext(servletContext)
         return webEnvironment
     }
 
